@@ -5,6 +5,8 @@ import MovieDetail from './components/MovieDetail';
 import Menu from './components/Menu';
 import Region from './components/LatestMovie/Region';
 import LatestList from './components/LatestMovie/LatestList'
+import UpcommingMovie from './components/UpcomingMovie';
+import TopRatedMovie from './components/TopRatedMovie';
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Easing, Animated, Dimensions } from 'react-native';
 
@@ -15,7 +17,9 @@ export const AppStack = createStackNavigator({
     MovieDetail,
     Menu,
     Region,
-    LatestList
+    LatestList,
+    UpcommingMovie,
+    TopRatedMovie
 }, {
         initialRouteName: 'MainScreen',
         navigationOptions: {

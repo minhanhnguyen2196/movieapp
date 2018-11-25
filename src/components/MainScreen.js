@@ -42,7 +42,7 @@ class MainScreen extends Component {
             .then(resJson => {
                 this.setState({ initialList: resJson.results, loading: false, searchList: resJson.results })
             })
-            .catch(err =>  console.log(err) )
+            .catch(err => console.log(err))
     }
     _onChangeText = (text) => {
         this.setState({ searchInput: text })
@@ -86,7 +86,7 @@ class MainScreen extends Component {
                 <Header style={{ backgroundColor: '#2f3640' }}>
                     <Left>
                         <Button transparent onPress={() => this.props.navigation.openDrawer()}>
-                            <Icon name='bars' type='FontAwesome'   />
+                            <Icon name='bars' type='FontAwesome' />
                         </Button>
                     </Left>
                     <Body style={{ flex: 1, alignItems: 'center' }}>

@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import { View, Dimensions, ActivityIndicator, Image, TouchableWithoutFeedback, TouchableOpacity} from 'react-native';
-import { Container, Header, Content, Left, Right, Body, Text, Button, Icon, Title, Input, Item } from 'native-base'
+import { View, ActivityIndicator, TouchableWithoutFeedback, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { Container, Header, Content, Left, Right, Body, Text, Button, Title, Input, Item, Icon } from 'native-base'
 
-const url = 'https://api.themoviedb.org/3/movie/now_playing?api_key=de2160c2c7da7ae411932a495296b3aa&page=1&region='
 const baseImgUrl = 'https://image.tmdb.org/t/p/w300/';
 const { height, width } = Dimensions.get('window');
-
-class LatestList extends Component {
+const url = 'https://api.themoviedb.org/3/movie/upcoming?api_key=de2160c2c7da7ae411932a495296b3aa&language=en-US&page=1';
+class UpcommingMovie extends Component {
     constructor(props) {
         super(props);
-        this.state = { list: [], loading: true, searchInput: '' };
+        this.state = {
+            list: [],
+            loading: true, searchInput: ''
+        };
     }
-    componentDidMount() {
-        const { navigation } = this.props;
-        const region = navigation.getParam('region')
-        fetch(url + region, {
+
+    componentDidMount = () => {
+        fetch(url, {
             method: 'get'
         })
             .then(res => res.json())
@@ -35,6 +36,7 @@ class LatestList extends Component {
                 </TouchableWithoutFeedback>
             )
         })
+
         return (
             <Container>
                 <Header style={{ backgroundColor: '#2f3640' }}>
@@ -44,7 +46,7 @@ class LatestList extends Component {
                         </Button>
                     </Left>
                     <Body style={{ flex: 1, alignItems: 'center' }}>
-                        <Title>Latest movies</Title>
+                        <Title>Upcomming movies</Title>
                     </Body>
                     <Right></Right>
                 </Header>
@@ -84,8 +86,8 @@ class LatestList extends Component {
                     </View>
                 </Content>
             </Container>
-        );
+        )
     }
 }
 
-export default LatestList;
+export default UpcommingMovie;
