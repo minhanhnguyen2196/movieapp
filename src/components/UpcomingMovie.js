@@ -9,7 +9,8 @@ class UpcommingMovie extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: [],
+            initialList: [],
+            searchList: [],
             loading: true, searchInput: ''
         };
     }
@@ -20,13 +21,39 @@ class UpcommingMovie extends Component {
         })
             .then(res => res.json())
             .then(resJson => {
-                this.setState({ list: resJson.results, loading: false })
+                this.setState({ initialList: resJson.results, searchList: resJson.results, loading: false })
             })
     }
 
+    _onChangeText = (text) => {
+        this.setState({ searchInput: text })
+
+    }
+
+    searchMovie = () => {
+        const { searchInput } = this.state;
+        if (searchInput !== '') {
+            fetch('https://api.themoviedb.org/3/search/movie?api_key=de2160c2c7da7ae411932a495296b3aa&language=en-US&page=1&query=' + searchInput,
+                {
+                    method: 'get',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(res => res.json())
+                .then(resJson => {
+                    this.setState({ searchList: resJson.results })
+                })
+        }
+    }
+    cancelSearch = () => {
+        this.setState({ searchInput: '', searchList: this.state.initialList })
+        this.textInput._root.clear();
+    }
+    
     render() {
-        const { loading, list, searchInput } = this.state;
-        let images = list.map((val, key) => {
+        const { loading, searchList, searchInput } = this.state;
+        let images = searchList.map((val, key) => {
             return (
                 <TouchableWithoutFeedback key={key} onPress={() => this.props.navigation.navigate('MovieDetail', { detail: val })} >
                     <Image
