@@ -3,7 +3,7 @@ import { View, Image, ScrollView, TouchableOpacity, ActivityIndicator, FlatList 
 import { Container, Content, Button, Text, Header, Left, Icon, Right, Body, Title } from 'native-base';
 const baseImgUrl = 'https://image.tmdb.org/t/p/w185/';
 const baseLogoUrl = 'https://image.tmdb.org/t/p/w92/';
-const url = 'https://api.themoviedb.org/3/movie/'
+const url = 'https://api.themoviedb.org/3/movie/';
 const param = '?api_key=de2160c2c7da7ae411932a495296b3aa&language=en-US&append_to_response=credits,releases,videos'
 
 var profile = require('../assets/profile.png')
@@ -29,17 +29,15 @@ class MovieDetail extends PureComponent {
             .then(resJson => {
                 console.log(resJson);
                 this.setState({ movieDetail: resJson })
-
             })
             .catch(err => console.log(err))
-
     }
+
     _renderImage = ({ item }) => (
         <View style={{ alignItems: 'center', padding: 10 }}>
             <Image source={ item.profile_path ? {  uri: baseImgUrl + item.profile_path } : profile} style={{ width: 80, height: 100 }} />
             <Text style={{ padding: 4 }}>{item.name}</Text>
         </View>
-
     );
 
 
@@ -138,10 +136,7 @@ class MovieDetail extends PureComponent {
                                         />
 
                                     }
-
                                 </View>
-
-
                                 <View style={{ padding: 10 }}>
                                     <Text style={{ paddingVertical: 10 }}>Overview</Text>
                                     <Text>
@@ -151,7 +146,6 @@ class MovieDetail extends PureComponent {
                             </View>
                             : <ActivityIndicator animating color='#c23616' size='large' />
                     }
-
                 </Content>
             </Container>
         );
